@@ -66,6 +66,21 @@ export default function Rates() {
     }));
   };
 
+  const handleAddTier = () => {
+    const nextIndex = Object.keys(prizeTiers).length;
+    const nextLetter = String.fromCharCode('A'.charCodeAt(0) + nextIndex);
+
+    setPrizeTiers(prev => ({
+      ...prev,
+      [nextLetter]: {
+        id: nextIndex + 1,
+        unclaimed: 0,
+        prizes: 25,
+        want: false
+      }
+    }));
+  }
+
   return(
     <div className="text-center">
       <div className="sticky top-0 bg-white z-10 p-4 shadow-md">
@@ -147,6 +162,14 @@ export default function Rates() {
           </div>
         );
       })}
+      {Object.keys(prizeTiers).length < 26 &&
+        (<button className="p-4 bg-blue-400 hover:bg-blue-500 cursor-pointer rounded-2xl text-white"
+        onClick={() => handleAddTier()}>
+          New Tier
+        </button>)
+        ||
+        null
+      }
     </div>
   );
 }

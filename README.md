@@ -1,1 +1,2 @@
-[ ] Individual Rates on each tier 
+[ ] Make look better
+[ ]
