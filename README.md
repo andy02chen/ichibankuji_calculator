@@ -1,0 +1,1 @@
+[ ] Individual Rates on each tier 

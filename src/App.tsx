@@ -3,10 +3,7 @@ import Rates from "./components/Rates"
 function App() {
   return (
     <div className="h-screen w-screen flex items-center justify-center bg-radial-[at_50%_75%] from-sky-200 via-blue-400 to-indigo-900 to-90% text-gray-800 ">
-      <div className="bg-white p-8 rounded-lg shadow-md max-h-[80vh] overflow-auto w-5/6 max-w-[75w]">
-        <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">
-          Ichibankuji Rate Calculator
-        </h1>
+      <div className="bg-white rounded-lg shadow-md max-h-[80vh] overflow-auto w-5/6 max-w-[75w]">
         <Rates/>
       </div>
     </div>
