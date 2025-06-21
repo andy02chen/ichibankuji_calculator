@@ -81,6 +81,19 @@ export default function Rates() {
     }));
   }
 
+  const handleRemoveTier = () => {
+    const keys = Object.keys(prizeTiers);
+    if (keys.length === 0) return;
+
+    const removeIndex = keys.length - 1;
+    const removeLetter = String.fromCharCode('A'.charCodeAt(0) + removeIndex);
+    const copy = { ...prizeTiers };
+
+    delete copy[removeLetter];
+
+    setPrizeTiers(copy);
+  }
+
   return(
     <div className="text-center">
       <div className="sticky top-0 bg-white z-10 p-4 shadow-md">
@@ -102,20 +115,30 @@ export default function Rates() {
 
         return (
           <div key={tier.id} className="py-4 px-2">
-            <h3 className="text-3xl mb-2 bg-e">
-              <input
-                type="checkbox"
-                id={tier.id + "_checked"}
-                defaultChecked={tier.want}
-                className="mr-2 w-5 h-5 text-blue-600 bg-white border-2 border-gray-300 rounded checked:bg-blue-600 checked:border-blue-600"
-                onChange={(e) => {
-                  handleUpdateSelections(tierName, e.target.checked);
-                }}
-              />
-              <label htmlFor={tier.id + "_checked"}>Tier {tierName}</label>
+            <div className="text-3xl mb-2 bg-e">
+              <div className="flex justify-center items-center gap-4">
+                <input
+                  type="checkbox"
+                  id={tier.id + "_checked"}
+                  defaultChecked={tier.want}
+                  className="mr-2 w-5 h-5 text-blue-600 bg-white border-2 border-gray-300 rounded checked:bg-blue-600 checked:border-blue-600"
+                  onChange={(e) => {
+                    handleUpdateSelections(tierName, e.target.checked);
+                  }}
+                />
+                <label htmlFor={tier.id + "_checked"}>Tier {tierName}</label>
+                {(Object.keys(prizeTiers).length === tier.id && tier.id !== 1) &&
+                (<button className="cursor-pointer bg-red-400 text-white font-bold px-1.5 rounded-sm hover:bg-red-500"
+                onClick={() => handleRemoveTier()}>
+                  &#10005;
+                </button>)
+                ||
+                null
+                }
+              </div>
               <h1>{chance}
               </h1>
-            </h3>
+            </div>
             <div>
               <div className="flex items-center justify-center gap-4">
                 <input
