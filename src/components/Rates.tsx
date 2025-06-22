@@ -9,7 +9,7 @@ type PrizeTier = {
 
 export default function Rates() {
 
-  // const [rate, setRate] = useState(20);
+  const [cost, setCost] = useState(20);
   const [prizeTiers, setPrizeTiers] = useState<Record<string, PrizeTier>>({
     A: { id: 1, unclaimed: 0, prizes: 1, want: true },
     B: { id: 2, unclaimed: 0, prizes: 2, want: true },
@@ -54,6 +54,10 @@ export default function Rates() {
         unclaimed: value
       }
     }));
+  };
+
+  const handleUpdateRate = (cost: number) => {
+    setCost(cost);
   };
 
   const handleUpdatePrizes = (tierName: string, value: number) => {
@@ -102,8 +106,8 @@ export default function Rates() {
         </h1>
         <div className="flex items-center justify-center gap-2">
           Cost per draw $
-          <input type="number" id="rate" name="rate" className="border w-12 h-12 text-center text-xl rounded-md" min="0" defaultValue={20}/>
-          
+          <input type="number" id="rate" name="rate" className="border w-12 h-12 text-center text-xl rounded-md" min="0" defaultValue={20}
+          onChange={(e) => handleUpdateRate(parseFloat(e.target.value))}/>
         </div>
         <div className="flex items-center justify-center gap-2">
           Chance of winning selected prize(s): {totalPrizes > 0 ? ((1 - ((totalPrizes - selectedPrizes) / totalPrizes)) * 100).toFixed(2) + '%' : 'N/A'}
@@ -111,23 +115,24 @@ export default function Rates() {
       </div>
       {Object.entries(prizeTiers).map(([tierName, tier]) => {
         const remaining = Math.max(0, tier.prizes - tier.unclaimed);
+        const chance = totalPrizes > 0 ? ((remaining / totalPrizes) * 100): 0;
 
         return (
           <div key={tier.id} className="py-4 px-2">
             <div className="text-3xl mb-2 bg-e">
-              <div className="flex justify-center items-center gap-4">
+              <div className="flex justify-center items-center">
                 <input
                   type="checkbox"
                   id={tier.id + "_checked"}
                   defaultChecked={tier.want}
-                  className="mr-2 w-5 h-5 text-blue-600 bg-white border-2 border-gray-300 rounded checked:bg-blue-600 checked:border-blue-600"
+                  className="mr-2 w-5 h-5 text-blue-600 bg-white border-2 border-gray-300 rounded checked:bg-blue-600 checked:border-blue-600 cursor-pointer"
                   onChange={(e) => {
                     handleUpdateSelections(tierName, e.target.checked);
                   }}
                 />
-                <label htmlFor={tier.id + "_checked"}>Tier {tierName}</label>
+                <label className="cursor-pointer" htmlFor={tier.id + "_checked"}>Tier {tierName}</label>
                 {(Object.keys(prizeTiers).length === tier.id && tier.id !== 1) &&
-                (<button className="cursor-pointer bg-red-400 text-white font-bold px-1.5 rounded-sm hover:bg-red-500"
+                (<button className="cursor-pointer bg-red-400 text-white font-bold px-1.5 rounded-sm hover:bg-red-500 mx-2"
                 onClick={() => handleRemoveTier()}>
                   &#10005;
                 </button>)
@@ -135,7 +140,8 @@ export default function Rates() {
                 null
                 }
               </div>
-              <h1>{totalPrizes > 0 ? ((remaining / totalPrizes) * 100).toFixed(2) + '%' : '0%'}</h1>
+              <h1>{chance.toFixed(2)  + "%"}</h1>
+              <h1>~${(100/chance * cost).toFixed(2)}</h1>
             </div>
             <div>
               <div className="flex items-center justify-center gap-4">
