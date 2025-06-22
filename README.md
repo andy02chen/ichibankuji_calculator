@@ -1,2 +1,2 @@
 [ ] Make look better
-[ ] Calculate costs
+[ ] Estimated cost at desired chance to win

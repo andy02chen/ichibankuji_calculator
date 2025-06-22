@@ -141,7 +141,12 @@ export default function Rates() {
                 }
               </div>
               <h1>{chance.toFixed(2)  + "%"}</h1>
-              <h1>~${(100/chance * cost).toFixed(2)}</h1>
+              {chance > 0 && 
+                (<h1>~${(100/chance * cost).toFixed(2)}</h1>)
+                ||
+                null
+              }
+              
             </div>
             <div>
               <div className="flex items-center justify-center gap-4">
