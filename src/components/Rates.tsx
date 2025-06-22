@@ -24,7 +24,7 @@ export default function Rates() {
     let remainingSelected = 0;
 
     Object.values(prizeTiers).forEach((tier) => {
-      const remaining = tier.prizes - tier.unclaimed;
+      const remaining = Math.max(0, tier.prizes - tier.unclaimed);
 
       totalRemaining += remaining;
 
@@ -110,8 +110,7 @@ export default function Rates() {
         </div>
       </div>
       {Object.entries(prizeTiers).map(([tierName, tier]) => {
-        const remaining = tier.prizes - tier.unclaimed;
-        const chance = totalPrizes > 0 && tier.want ? ((remaining / totalPrizes) * 100).toFixed(2) + '%' : '0%';
+        const remaining = Math.max(0, tier.prizes - tier.unclaimed);
 
         return (
           <div key={tier.id} className="py-4 px-2">
@@ -136,8 +135,7 @@ export default function Rates() {
                 null
                 }
               </div>
-              <h1>{chance}
-              </h1>
+              <h1>{totalPrizes > 0 ? ((remaining / totalPrizes) * 100).toFixed(2) + '%' : '0%'}</h1>
             </div>
             <div>
               <div className="flex items-center justify-center gap-4">
