@@ -9,3 +9,25 @@
     -moz-appearance: textfield !important;
   }
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #60a5fa;
+  border-radius: 7px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-button {
+  height: 12px;
+  width: 12px;
+  border-radius: 4px;
+}
