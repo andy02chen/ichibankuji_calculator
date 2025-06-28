@@ -107,8 +107,8 @@ export default function Rates() {
   }
 
   return(
-    <div className="text-center">
-      <div className="sticky top-0 z-10 p-4 shadow-md bg-white rounded-3xl">
+    <div className="text-center flex flex-col">
+      <div className="sticky top-0 z-10 p-4 shadow-md bg-white rounded-3xl mb-6 overflow-x-hidden">
         <h1 className="text-3xl font-bold text-gray-800 mb-4 text-center">
           Ichibankuji Rate Calculator
         </h1>
@@ -118,7 +118,7 @@ export default function Rates() {
           onChange={(e) => handleUpdateRate(parseFloat(e.target.value))}/>
         </div>
       </div>
-      <div className="flex-1 overflow-auto px-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 overflow-auto px-4">
         {Object.entries(prizeTiers).map(([tierName, tier]) => {
           const remaining = Math.max(0, tier.prizes - tier.unclaimed);
           const chance = totalPrizes > 0 ? ((remaining / totalPrizes) * 100): 0;
@@ -202,54 +202,50 @@ export default function Rates() {
         })}
       </div>
 
-      <div className="sticky bottom-0 z-10 p-4 shadow-md bg-white rounded-3xl text-left flex flex-col gap-4">
-        <h1 className="font-bold text-3xl">
-          Overall Summary
-        </h1>
-        <div className="grid grid-cols-3 gap-x-4 p-4 rounded-xl">
-          <div className="bg-gray-200 p-4 rounded-md">
-            <h1 className="text-l">
-              SELECTED PRIZES
-            </h1>
-            <h1 className="text-3xl font-bold">
-              {selectedPrizes}
-            </h1>
-          </div>
-          <div className="bg-gray-200 p-4 rounded-md">
-            <h1 className="text-l">
-              TOTAL PRIZES
-            </h1>
-            <h1 className="text-3xl font-bold">
-              {totalPrizes}
-            </h1>
-          </div>
-          <div className="bg-gray-200 p-4 rounded-md">
-            <h1 className="text-l">
-              WIN RATE
-            </h1>
-            <h1 className="text-3xl font-bold">
-              {totalPrizes > 0 ? ((1 - ((totalPrizes - selectedPrizes) / totalPrizes)) * 100).toFixed(2) + '%' : 'N/A'}
-            </h1>
-          </div>
-        </div>
-        <div className="flex items-center justify-center gap-4">
-          {Object.keys(prizeTiers).length < 26 && (
-            <button
-              className="p-4 bg-blue-500 hover:bg-blue-600 cursor-pointer rounded-2xl text-white font-bold"
-              onClick={() => handleAddTier()}
-            >
-              + Add New Tier
-            </button>
-          )}
-          <button
-            className="p-4 bg-gray-300 hover:bg-gray-400 cursor-pointer rounded-2xl text-gray-800 font-bold flex items-center justify-center"
-            onClick={() => handleResetAll()}
-          >
-            <RotateCcw className="mr-2 h-4 w-4" />
-            Reset All
-          </button>
-        </div>
-      </div>
+      <div className="sticky bottom-0 z-10 p-2 sm:p-4 shadow-md bg-gray-50 rounded-3xl text-left overflow-x-hidden">
+  <h1 className="font-bold text-xl sm:text-3xl mb-2 sm:mb-0">
+    Overall Summary
+  </h1>
+  
+  {/* Compact grid on mobile */}
+  <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-2 sm:mb-4">
+    <div className="bg-gray-200 p-2 sm:p-4 rounded-md">
+      <h1 className="text-xs sm:text-base">SELECTED</h1>
+      <h1 className="text-base sm:text-3xl font-bold">{selectedPrizes}</h1>
+    </div>
+    <div className="bg-gray-200 p-2 sm:p-4 rounded-md">
+      <h1 className="text-xs sm:text-base">TOTAL</h1>
+      <h1 className="text-base sm:text-3xl font-bold">{totalPrizes}</h1>
+    </div>
+    <div className="bg-gray-200 p-2 sm:p-4 rounded-md">
+      <h1 className="text-xs sm:text-base">WIN RATE</h1>
+      <h1 className="text-base sm:text-3xl font-bold">
+        {totalPrizes > 0 ? ((1 - ((totalPrizes - selectedPrizes) / totalPrizes)) * 100).toFixed(2) + '%' : 'N/A'}
+      </h1>
+    </div>
+  </div>
+
+  {/* Stack buttons vertically on mobile */}
+  <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
+    {Object.keys(prizeTiers).length < 26 && (
+      <button
+        className="w-full sm:w-auto p-2 sm:p-4 bg-blue-500 hover:bg-blue-600 cursor-pointer rounded-xl
+        sm:rounded-2xl text-white font-bold text-sm sm:text-lg"
+        onClick={() => handleAddTier()}
+      >
+        + Add Tier
+      </button>
+    )}
+    <button
+      className="w-full sm:w-auto p-2 sm:p-4 bg-gray-300 hover:bg-gray-400 cursor-pointer
+      rounded-xl sm:rounded-2xl text-gray-800 font-bold flex items-center justify-center text-sm sm:text-lg"
+      onClick={() => handleResetAll()}
+    >
+      <RotateCcw className="mr-2 h-3 sm:h-4 w-3 sm:w-4" />
+      Reset
+    </button>
+  </div>
+</div>
     </div>
   );
 }
