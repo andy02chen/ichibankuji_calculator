@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
 import { RotateCcw } from "lucide-react"
+import Prizes from "./Prizes";
 
-type PrizeTier = {
+export type PrizeTier = {
   id: number;
   unclaimed: number;
   prizes: number;
@@ -108,12 +109,13 @@ export default function Rates() {
 
   return(
     <div className="text-center flex flex-col">
-      <div className="sticky top-0 z-10 p-6 shadow-lg rounded-3xl bg-white/90 backdrop-blur-sm border border-gray-100">
-        <h1 className="text-3xl font-bold text-gray-700 mb-6 text-center">
+      <div className="sticky top-0 z-10 p-2 lg:p-6 shadow-lg rounded-3xl bg-white 
+      backdrop-blur-sm border border-gray-100">
+        <h1 className="text-3xl font-bold text-gray-700 mb-2 lg:mb-6 text-center">
           Ichibankuji Rate Calculator
           <div className="w-2/3 h-1 mx-auto mt-3 bg-blue-400 rounded-full"></div>
         </h1>
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-2 sm:gap-4">
           <label htmlFor="rate" className="text-lg text-gray-600 font-medium">
             Cost per draw
           </label>
@@ -133,91 +135,19 @@ export default function Rates() {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 overflow-auto px-4 mb-8 mt-8">
-        {Object.entries(prizeTiers).map(([tierName, tier]) => {
-          const remaining = Math.max(0, tier.prizes - tier.unclaimed);
-          const chance = totalPrizes > 0 ? ((remaining / totalPrizes) * 100): 0;
-
-          return (
-            <div key={tier.id} className="py-4 px-2">
-              <div className="text-3xl mb-2 bg-e">
-                <div className="flex justify-center items-center">
-                  <input
-                    type="checkbox"
-                    id={tier.id + "_checked"}
-                    checked={tier.want}
-                    className="mr-2 w-5 h-5 text-blue-600 bg-white border-2 border-gray-300 rounded checked:bg-blue-600 checked:border-blue-600 cursor-pointer"
-                    onChange={(e) => {
-                      handleUpdateSelections(tierName, e.target.checked);
-                    }}
-                  />
-                  <label className="cursor-pointer" htmlFor={tier.id + "_checked"}>Tier {tierName}</label>
-                  {(Object.keys(prizeTiers).length === tier.id && tier.id !== 1) &&
-                  (<button className="cursor-pointer bg-red-400 text-white font-bold px-1.5 rounded-sm hover:bg-red-500 mx-2"
-                  onClick={() => handleRemoveTier()}>
-                    &#10005;
-                  </button>)
-                  ||
-                  null
-                  }
-                </div>
-                <h1>{chance.toFixed(2)  + "%"}</h1>
-                {chance > 0 && 
-                  (<h1>~${(100/chance * cost).toFixed(2)}</h1>)
-                  ||
-                  null
-                }
-                
-              </div>
-              <div>
-                <div className="flex items-center justify-center gap-4">
-                  <input
-                    type="number"
-                    id={tier.id + '_available'}
-                    name={tier.id + '_available'}
-                    className="border w-16 h-16 text-center text-xl rounded-md"
-                    min="0"
-                    max={tier.prizes}
-                    value={tier.unclaimed}
-                    onChange={(e) => {
-                      handleUpdateUnclaimed(tierName, parseInt(e.target.value) || 0);
-                    }}
-                    onBlur={(e) => {
-                      let value = parseInt(e.target.value);
-                      if (isNaN(value) || value < 0) value = 0;
-                      if (value > prizeTiers[tierName].prizes) value = prizeTiers[tierName].prizes;
-                      e.target.value = value.toString();
-                      handleUpdateUnclaimed(tierName, value);
-                    }}
-                  />
-                  out of
-                  <input
-                    type="number"
-                    id={tier.id + '_total'}
-                    name={tier.id + '_total'}
-                    className="border w-16 h-16 text-center text-xl rounded-md"
-                    min={0}
-                    max={100}
-                    value={tier.prizes}
-                    onChange={(e) => {
-                      handleUpdatePrizes(tierName, parseInt(e.target.value) || 0);
-                    }}
-                    onBlur={(e) => {
-                      let value = parseInt(e.target.value);
-                      if (isNaN(value) || value < 0) value = 0;
-                      if (value > 100) value = 100;
-                      e.target.value = value.toString();
-                      handleUpdatePrizes(tierName, value);
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          );
-        })}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 overflow-auto sm:px-4 mb-8 mt-8">
+        <Prizes
+          prizeTiers={prizeTiers}
+          totalPrizes={totalPrizes}
+          cost={cost}
+          handleUpdateSelections={handleUpdateSelections}
+          handleRemoveTier={handleRemoveTier}
+          handleUpdateUnclaimed={handleUpdateUnclaimed}
+          handleUpdatePrizes={handleUpdatePrizes}
+        />
       </div>
 
-      <div className="sticky bottom-0 z-10 p-2 sm:p-4 shadow-md bg-gray-50 rounded-3xl text-left overflow-x-hidden
+      <div className="sticky bottom-0 z-10 p-2 sm:p-4 bg-white shadow-2xl rounded-2xl text-left overflow-x-hidden
       flex flex-col gap-4">
         <h1 className="font-bold text-xl sm:text-4xl mb-2 sm:mb-0">
           Overall Summary
@@ -225,15 +155,15 @@ export default function Rates() {
         
         {/* Compact grid on mobile */}
         <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-2 sm:mb-4">
-          <div className="bg-gray-200 p-2 sm:p-4 rounded-md">
+          <div className="bg-gray-300 p-2 sm:p-4 rounded-md">
             <h1 className="text-xs sm:text-base">SELECTED</h1>
             <h1 className="text-base sm:text-3xl font-bold">{selectedPrizes}</h1>
           </div>
-          <div className="bg-gray-200 p-2 sm:p-4 rounded-md">
+          <div className="bg-gray-300 p-2 sm:p-4 rounded-md">
             <h1 className="text-xs sm:text-base">TOTAL</h1>
             <h1 className="text-base sm:text-3xl font-bold">{totalPrizes}</h1>
           </div>
-          <div className="bg-gray-200 p-2 sm:p-4 rounded-md">
+          <div className="bg-gray-300 p-2 sm:p-4 rounded-md">
             <h1 className="text-xs sm:text-base">WIN RATE</h1>
             <h1 className="text-base sm:text-3xl font-bold">
               {totalPrizes > 0 ? ((1 - ((totalPrizes - selectedPrizes) / totalPrizes)) * 100).toFixed(2) + '%' : 'N/A'}
