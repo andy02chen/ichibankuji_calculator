@@ -40,32 +40,32 @@ const tierColors: Record<string, string> = {
 };
 
 const tierTextColors: Record<string, string> = {
-  '1': 'text-red-400',
-  '2': 'text-orange-400',
-  '3': 'text-amber-400',
-  '4': 'text-yellow-400',
-  '5': 'text-lime-400',
-  '6': 'text-green-400',
-  '7': 'text-emerald-400',
-  '8': 'text-teal-400',
-  '9': 'text-cyan-400',
-  '10': 'text-sky-400',
-  '11': 'text-blue-400',
-  '12': 'text-indigo-400',
-  '13': 'text-violet-400',
-  '14': 'text-purple-400',
-  '15': 'text-fuchsia-400',
-  '16': 'text-pink-400',
-  '17': 'text-rose-400',
-  '18': 'text-red-400',
-  '19': 'text-orange-400',
-  '20': 'text-amber-400',
-  '21': 'text-yellow-400',
-  '22': 'text-lime-400',
-  '23': 'text-green-400',
-  '24': 'text-emerald-400',
-  '25': 'text-teal-400',
-  '26': 'text-cyan-400'
+  '1': 'text-red-600',
+  '2': 'text-orange-600',
+  '3': 'text-amber-600',
+  '4': 'text-yellow-600',
+  '5': 'text-lime-600',
+  '6': 'text-green-600',
+  '7': 'text-emerald-600',
+  '8': 'text-teal-600',
+  '9': 'text-cyan-600',
+  '10': 'text-sky-600',
+  '11': 'text-blue-600',
+  '12': 'text-indigo-600',
+  '13': 'text-violet-600',
+  '14': 'text-purple-600',
+  '15': 'text-fuchsia-600',
+  '16': 'text-pink-600',
+  '17': 'text-rose-600',
+  '18': 'text-red-600',
+  '19': 'text-orange-600',
+  '20': 'text-amber-600',
+  '21': 'text-yellow-600',
+  '22': 'text-lime-600',
+  '23': 'text-green-600',
+  '24': 'text-emerald-600',
+  '25': 'text-teal-600',
+  '26': 'text-cyan-600'
 };
 
 const tierBGColors: Record<string, string> = {
@@ -128,7 +128,7 @@ export default function Prizes({
                 />
                 <label className="cursor-pointer font-bold" htmlFor={tier.id + "_checked"}>Tier {tierName}</label>
                 {(Object.keys(prizeTiers).length === tier.id && tier.id !== 1) &&
-                (<button className="cursor-pointer bg-red-400 text-white font-bold px-1.5 rounded-sm hover:bg-red-500 mx-2"
+                (<button className="cursor-pointer bg-red-400 text-white font-bold px-1.5 rounded-sm hover:bg-red-600 mx-2"
                 onClick={() => handleRemoveTier()}>
                   &#10005;
                 </button>)
@@ -191,7 +191,7 @@ export default function Prizes({
             </div>
 
             <div className={`bg-white p-1 grid grid-cols-3 gap-1 lg:gap-4 lg:p-4 rounded-md`}>
-              {['LEFT', 'WIN RATE', 'COST'].map((label, index) => (
+              {['LEFT', 'WIN RATE', 'COST'].map((label) => (
                 <div 
                   key={label}
                   className={`${tierBGColors[tier.id]} rounded p-3 flex flex-col items-center`}
