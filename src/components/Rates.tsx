@@ -109,7 +109,7 @@ export default function Rates() {
 
   return(
     <div className="text-center flex flex-col">
-      <div className="sticky top-0 z-10 p-2 lg:p-6 shadow-lg rounded-3xl bg-white 
+      <div className="sticky top-0 z-10 p-2 lg:p-6 shadow-lg sm:rounded-xl bg-white 
       backdrop-blur-sm border border-gray-100">
         <h1 className="text-3xl font-bold text-gray-700 mb-2 lg:mb-6 text-center">
           Ichibankuji Rate Calculator
@@ -147,7 +147,7 @@ export default function Rates() {
         />
       </div>
 
-      <div className="sticky bottom-0 z-10 p-2 sm:p-4 bg-white shadow-2xl rounded-2xl text-left overflow-x-hidden
+      <div className="sticky bottom-0 z-10 p-2 sm:p-4 bg-white shadow-2xl sm:rounded-xl text-left overflow-x-hidden
       flex flex-col gap-4">
         <h1 className="font-bold text-xl sm:text-4xl mb-2 sm:mb-0">
           Overall Summary

@@ -137,7 +137,7 @@ export default function Prizes({
                 }
               </div>
             </div>
-            <div className="p-4 text-left">
+            <div className="p-2 sm:p-4 text-left">
               <div className="flex flex-col items-center justify-center gap-4 w-full">
                 <div className="w-[90%]">
                   <h1>
@@ -190,7 +190,7 @@ export default function Prizes({
               </div>
             </div>
 
-            <div className={`bg-white p-1 grid grid-cols-3 gap-1 lg:gap-4 lg:p-4 rounded-md`}>
+            <div className={`bg-white p-2 grid grid-cols-3 gap-2 lg:gap-4 lg:p-4 rounded-b-2xl`}>
               {['LEFT', 'WIN RATE', 'COST'].map((label) => (
                 <div 
                   key={label}
