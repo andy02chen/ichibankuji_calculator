@@ -125,7 +125,7 @@ export default function Rates() {
               type="number"
               id="rate"
               name="rate"
-              className="pl-8 w-24 h-12 text-center text-xl border-2 rounded-xl
+              className="pl-8 w-24 h-8 sm:h-12 text-center text-xl border-2 rounded-xl
               focus:border-blue-400 focus:ring-2 focus:outline-none focus:ring-blue-100 transition-all border-blue-400"
               min="0"
               step="0.01"
@@ -148,13 +148,13 @@ export default function Rates() {
       </div>
 
       <div className="sticky bottom-0 z-10 p-2 sm:p-4 bg-white shadow-2xl sm:rounded-xl text-left overflow-x-hidden
-      flex flex-col gap-4">
-        <h1 className="font-bold text-xl sm:text-4xl mb-2 sm:mb-0">
+      flex flex-col gap-2 sm:gap-4">
+        <h1 className="font-bold text-xl sm:text-4xl">
           Overall Summary
         </h1>
         
         {/* Compact grid on mobile */}
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-2 sm:mb-4">
+        <div className="grid grid-cols-3 gap-2 sm:gap-4 sm:mb-4">
           <div className="bg-gray-300 p-2 sm:p-4 rounded-md">
             <h1 className="text-xs sm:text-base">SELECTED</h1>
             <h1 className="text-base sm:text-3xl font-bold">{selectedPrizes}</h1>

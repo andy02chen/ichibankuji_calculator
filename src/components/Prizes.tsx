@@ -115,7 +115,7 @@ export default function Prizes({
 
         return (
           <div key={tier.id} className="bg-white rounded-2xl">
-            <div className={`${tierBGColors[tier.id]} text-3xl mb-2 rounded-t-2xl p-4 border-t-4 ${tierColors[tier.id]}`}>
+            <div className={`${tierBGColors[tier.id]} text-3xl mb-2 rounded-t-2xl p-2 sm:p-4 border-t-4 ${tierColors[tier.id]}`}>
               <div className="flex justify-center items-center">
                 <input
                   type="checkbox"
