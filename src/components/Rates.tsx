@@ -111,12 +111,12 @@ export default function Rates() {
     <div className="text-center flex flex-col">
       <div className="sticky top-0 z-10 p-2 lg:p-6 shadow-lg sm:rounded-xl bg-white 
       backdrop-blur-sm border border-gray-100">
-        <h1 className="text-3xl font-bold text-gray-700 mb-2 lg:mb-6 text-center">
+        <h1 className="text-xl md:text-3xl font-bold text-gray-700 mb-2 lg:mb-6 text-center">
           Ichibankuji Rate Calculator
           <div className="w-2/3 h-1 mx-auto mt-3 bg-blue-400 rounded-full"></div>
         </h1>
         <div className="flex flex-col items-center gap-2 sm:gap-4">
-          <label htmlFor="rate" className="text-lg text-gray-600 font-medium">
+          <label htmlFor="rate" className="text-md md:text-lg text-gray-600 font-medium">
             Cost per draw
           </label>
           <div className="relative">
@@ -135,7 +135,7 @@ export default function Rates() {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 overflow-auto sm:px-4 mb-8 mt-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 overflow-auto sm:px-4 mb-4 mt-4 sm:mb-8 sm:mt-8">
         <Prizes
           prizeTiers={prizeTiers}
           totalPrizes={totalPrizes}

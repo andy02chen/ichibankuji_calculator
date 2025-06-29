@@ -126,7 +126,7 @@ export default function Prizes({
                     handleUpdateSelections(tierName, e.target.checked);
                   }}
                 />
-                <label className="cursor-pointer font-bold" htmlFor={tier.id + "_checked"}>Tier {tierName}</label>
+                <label className="text-xl md:text-2xl cursor-pointer font-bold" htmlFor={tier.id + "_checked"}>Tier {tierName}</label>
                 {(Object.keys(prizeTiers).length === tier.id && tier.id !== 1) &&
                 (<button className="cursor-pointer bg-red-400 text-white font-bold px-1.5 rounded-sm hover:bg-red-600 mx-2"
                 onClick={() => handleRemoveTier()}>
@@ -147,7 +147,7 @@ export default function Prizes({
                     type="number"
                     id={tier.id + '_available'}
                     name={tier.id + '_available'}
-                    className="border w-full h-16 text-xl rounded-md pl-4"
+                    className="border w-full h-12 md:h-16 text-xl rounded-md pl-4"
                     min="0"
                     max={tier.prizes}
                     value={tier.unclaimed}
@@ -171,7 +171,7 @@ export default function Prizes({
                     type="number"
                     id={tier.id + '_total'}
                     name={tier.id + '_total'}
-                    className="border w-full h-16 text-xl rounded-md pl-4"
+                    className="border w-full h-12 md:h-16 text-xl rounded-md pl-4"
                     min={0}
                     max={100}
                     value={tier.prizes}
