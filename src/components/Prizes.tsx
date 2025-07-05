@@ -114,21 +114,21 @@ export default function Prizes({
         const chance = totalPrizes > 0 ? ((remaining / totalPrizes) * 100): 0;
 
         return (
-          <div key={tier.id} className="bg-white rounded-2xl">
-            <div className={`${tierBGColors[tier.id]} text-3xl mb-2 rounded-t-2xl p-2 sm:p-4 border-t-4 ${tierColors[tier.id]}`}>
+          <div key={tier.id} className="bg-white rounded-xl lg:rounded-2xl">
+            <div className={`${tierBGColors[tier.id]} text-xl lg:text-2xl mb-1 rounded-t-xl lg:rounded-t-2xl p-2 sm:p-3 border-t-4 ${tierColors[tier.id]}`}>
               <div className="flex justify-center items-center">
                 <input
                   type="checkbox"
                   id={tier.id + "_checked"}
                   checked={tier.want}
-                  className="mr-2 w-5 h-5 text-blue-600 bg-white border-2 border-gray-300 rounded checked:bg-blue-600 checked:border-blue-600 cursor-pointer"
+                  className="mr-2 w-4 h-4 lg:w-5 lg:h-5 text-blue-600 bg-white border-2 border-gray-300 rounded checked:bg-blue-600 checked:border-blue-600 cursor-pointer"
                   onChange={(e) => {
                     handleUpdateSelections(tierName, e.target.checked);
                   }}
                 />
-                <label className="text-xl md:text-2xl cursor-pointer font-bold" htmlFor={tier.id + "_checked"}>Tier {tierName}</label>
+                <label className="text-base md:text-lg lg:text-xl cursor-pointer font-bold" htmlFor={tier.id + "_checked"}>Tier {tierName}</label>
                 {(Object.keys(prizeTiers).length === tier.id && tier.id !== 1) &&
-                (<button className="cursor-pointer bg-red-400 text-white font-bold px-1.5 rounded-sm hover:bg-red-600 mx-2"
+                (<button className="cursor-pointer bg-red-400 text-white font-bold px-1 rounded-sm hover:bg-red-600 mx-1 lg:mx-2 text-sm lg:text-base"
                 onClick={() => handleRemoveTier()}>
                   &#10005;
                 </button>)
@@ -137,17 +137,17 @@ export default function Prizes({
                 }
               </div>
             </div>
-            <div className="p-2 sm:p-4 text-left">
-              <div className="flex flex-col items-center justify-center gap-4 w-full">
+            <div className="p-2 sm:p-3 text-left">
+              <div className="flex flex-col items-center justify-center gap-2 sm:gap-3 w-full">
                 <div className="w-[90%]">
-                  <h1>
+                  <h1 className="text-sm lg:text-base">
                     Claimed
                   </h1>
                   <input
                     type="number"
                     id={tier.id + '_available'}
                     name={tier.id + '_available'}
-                    className="border w-full h-12 md:h-16 text-xl rounded-md pl-4"
+                    className="border w-full h-10 text-base lg:text-lg rounded-md pl-3 lg:pl-4"
                     min="0"
                     max={tier.prizes}
                     value={tier.unclaimed}
@@ -164,14 +164,14 @@ export default function Prizes({
                   />
                 </div>
                 <div className="w-[90%]">
-                  <h1>
+                  <h1 className="text-sm lg:text-base">
                     Total
                   </h1>
                   <input
                     type="number"
                     id={tier.id + '_total'}
                     name={tier.id + '_total'}
-                    className="border w-full h-12 md:h-16 text-xl rounded-md pl-4"
+                    className="border w-full h-10 text-base lg:text-lg rounded-md pl-3 lg:pl-4"
                     min={0}
                     max={100}
                     value={tier.prizes}
@@ -190,16 +190,16 @@ export default function Prizes({
               </div>
             </div>
 
-            <div className={`bg-white p-2 grid grid-cols-3 gap-2 lg:gap-4 lg:p-4 rounded-b-2xl`}>
+            <div className={`bg-white p-1 sm:p-2 grid grid-cols-3 gap-1 sm:gap-2 lg:gap-3 rounded-b-xl lg:rounded-b-2xl`}>
               {['LEFT', 'WIN RATE', 'COST'].map((label) => (
                 <div 
                   key={label}
-                  className={`${tierBGColors[tier.id]} rounded p-3 flex flex-col items-center`}
+                  className={`${tierBGColors[tier.id]} rounded p-2 flex flex-col items-center`}
                 >
-                  <h1 className={`text-xs lg:text-xl mb-1 ${tierTextColors[tier.id]} font-bold`}>
+                  <h1 className={`text-xs lg:text-sm mb-1 ${tierTextColors[tier.id]} font-bold`}>
                     {label}
                   </h1>
-                  <h1 className="font-bold text-base lg:text-2xl">
+                  <h1 className="font-bold text-sm sm:text-base">
                     {label === 'LEFT' && remaining}
                     {label === 'WIN RATE' && `${chance.toFixed(2)}%`}
                     {label === 'COST' && chance > 0 && `~$${(100/chance * cost).toFixed(2)}`}

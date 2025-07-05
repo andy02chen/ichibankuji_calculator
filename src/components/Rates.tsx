@@ -109,14 +109,15 @@ export default function Rates() {
 
   return(
     <div className="text-center flex flex-col">
-      <div className="sticky top-0 z-10 p-2 lg:p-6 shadow-lg sm:rounded-xl bg-white 
+      {/* Header Section */}
+      <div className="sticky top-0 z-10 p-2 shadow-lg sm:rounded-xl bg-white 
       backdrop-blur-sm border border-gray-100">
-        <h1 className="text-xl md:text-3xl font-bold text-gray-700 mb-2 lg:mb-6 text-center">
+        <h1 className="text-xl md:text-2xl lg:text-2xl font-bold text-gray-700 mb-1 lg:mb-3 text-center">
           Ichibankuji Rate Calculator
-          <div className="w-2/3 h-1 mx-auto mt-3 bg-blue-400 rounded-full"></div>
+          <div className="w-2/3 h-1 mx-auto mt-1 bg-blue-400 rounded-full"></div>
         </h1>
-        <div className="flex flex-col items-center gap-2 sm:gap-4">
-          <label htmlFor="rate" className="text-md md:text-lg text-gray-600 font-medium">
+        <div className="flex flex-col items-center gap-1">
+          <label htmlFor="rate" className="text-sm md:text-base text-gray-600 font-medium">
             Cost per draw
           </label>
           <div className="relative">
@@ -125,7 +126,7 @@ export default function Rates() {
               type="number"
               id="rate"
               name="rate"
-              className="pl-8 w-24 h-8 sm:h-12 text-center text-xl border-2 rounded-xl
+              className="pl-8 w-20 h-8 sm:h-10 lg:h-12 text-center text-lg lg:text-base border-2 rounded-xl
               focus:border-blue-400 focus:ring-2 focus:outline-none focus:ring-blue-100 transition-all border-blue-400"
               min="0"
               step="0.01"
@@ -135,7 +136,9 @@ export default function Rates() {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 overflow-auto sm:px-4 mb-4 mt-4 sm:mb-8 sm:mt-8">
+
+      {/* Prize Tiers Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 overflow-auto px-2 my-2 ">
         <Prizes
           prizeTiers={prizeTiers}
           totalPrizes={totalPrizes}
@@ -147,47 +150,46 @@ export default function Rates() {
         />
       </div>
 
-      <div className="sticky bottom-0 z-10 p-2 sm:p-4 bg-white shadow-2xl sm:rounded-xl text-left overflow-x-hidden
-      flex flex-col gap-2 sm:gap-4">
-        <h1 className="font-bold text-xl sm:text-4xl">
+      {/* Footer Section */}
+      <div className="sticky bottom-0 z-10 p-2 sm:p-3 bg-white shadow-2xl sm:rounded-xl text-left overflow-x-hidden
+      flex flex-col gap-1 sm:gap-2">
+        <h1 className="font-bold text-lg sm:text-2xl lg:text-2xl">
           Overall Summary
         </h1>
         
-        {/* Compact grid on mobile */}
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 sm:mb-4">
-          <div className="bg-gray-300 p-2 sm:p-4 rounded-md">
-            <h1 className="text-xs sm:text-base">SELECTED</h1>
-            <h1 className="text-base sm:text-3xl font-bold">{selectedPrizes}</h1>
+        <div className="grid grid-cols-3 gap-1 sm:gap-2">
+          <div className="bg-gray-300 p-2 sm:p-3 rounded-md">
+            <h1 className="text-xs sm:text-sm">SELECTED</h1>
+            <h1 className="text-sm sm:text-xl lg:text-2xl font-bold">{selectedPrizes}</h1>
           </div>
-          <div className="bg-gray-300 p-2 sm:p-4 rounded-md">
-            <h1 className="text-xs sm:text-base">TOTAL</h1>
-            <h1 className="text-base sm:text-3xl font-bold">{totalPrizes}</h1>
+          <div className="bg-gray-300 p-2 sm:p-3 rounded-md">
+            <h1 className="text-xs sm:text-sm">TOTAL</h1>
+            <h1 className="text-sm sm:text-xl lg:text-2xl font-bold">{totalPrizes}</h1>
           </div>
-          <div className="bg-gray-300 p-2 sm:p-4 rounded-md">
-            <h1 className="text-xs sm:text-base">WIN RATE</h1>
-            <h1 className="text-base sm:text-3xl font-bold">
+          <div className="bg-gray-300 p-2 sm:p-3 rounded-md">
+            <h1 className="text-xs sm:text-sm">WIN RATE</h1>
+            <h1 className="text-sm sm:text-xl lg:text-2xl font-bold">
               {totalPrizes > 0 ? ((1 - ((totalPrizes - selectedPrizes) / totalPrizes)) * 100).toFixed(2) + '%' : 'N/A'}
             </h1>
           </div>
         </div>
 
-        {/* Stack buttons vertically on mobile */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 mt-1 sm:mt-2">
           {Object.keys(prizeTiers).length < 26 && (
             <button
-              className="w-full sm:w-auto p-2 sm:p-4 bg-blue-500 hover:bg-blue-600 cursor-pointer rounded-xl
-              sm:rounded-2xl text-white font-bold text-sm sm:text-lg"
+              className="w-full sm:w-auto p-1 sm:p-2 lg:p-3 bg-blue-500 hover:bg-blue-600 cursor-pointer rounded-lg
+              sm:rounded-xl text-white font-bold text-xs sm:text-sm lg:text-base"
               onClick={() => handleAddTier()}
             >
               + Add Tier
             </button>
           )}
           <button
-            className="w-full sm:w-auto p-2 sm:p-4 bg-gray-300 hover:bg-gray-400 cursor-pointer
-            rounded-xl sm:rounded-2xl text-gray-800 font-bold flex items-center justify-center text-sm sm:text-lg"
+            className="w-full sm:w-auto p-1 sm:p-2 lg:p-3 bg-gray-300 hover:bg-gray-400 cursor-pointer
+            rounded-lg sm:rounded-xl text-gray-800 font-bold flex items-center justify-center text-xs sm:text-sm lg:text-base"
             onClick={() => handleResetAll()}
           >
-            <RotateCcw className="mr-2 h-3 sm:h-4 w-3 sm:w-4" />
+            <RotateCcw className="mr-1 h-3 sm:h-4 w-3 sm:w-4" />
             Reset
           </button>
         </div>
